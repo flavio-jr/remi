@@ -114,6 +114,11 @@ module.exports = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
         test: /\.(js|jsx|mjs)$/,
         enforce: 'pre',
         use: [
@@ -222,7 +227,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.scss$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
