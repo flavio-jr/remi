@@ -1,0 +1,16 @@
+{
+    "menu": [
+      {
+        "id": 1,
+        "name": "Pizza",
+        "price": 30.75,
+        "category_id": 1
+      }
+    ],
+    "categories": [
+      {
+        "id": 1,
+        "name": "Pastas"
+      }
+    ]
+  }
