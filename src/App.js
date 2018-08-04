@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Routes from './Routes'
 import './App.scss'
 
 class App extends Component {
   render() {
     return (
-      <h1>Hello, world</h1>
+      <div className="container is-fluid">
+        {Routes()}
+      </div>
     )
   }
 }
