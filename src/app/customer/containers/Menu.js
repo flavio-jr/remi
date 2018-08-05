@@ -7,24 +7,36 @@ class Menu extends Component {
     super(props)
 
     this.state = {
-      menu: []
+      menu: [],
+      categories: []
     }
   }
 
   render () {
-    return <CMenu menuItems={this.state.menu} />
+    return <CMenu menuItems={this.state.menu} categories={this.state.categories} />
   }
 
   componentDidMount () {
-    this
+    const menu = this
       .props
       .menuService
       .list()
-      .then(menu => {
+
+    const categories = this
+      .props
+      .categoriesService
+      .list()
+
+    Promise.all([menu, categories])
+      .then(([menuItems, categories ]) => {
         this.setState({
           menu: [
             ...this.state.menu,
-            ...menu
+            ...menuItems
+          ],
+          categories: [
+            ...this.state.categories,
+            ...categories
           ]
         })
       })

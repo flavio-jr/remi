@@ -4,8 +4,11 @@ import Menu from './containers/Menu'
 export default [
   {
     path: '/menu',
-    component: ({ menuService }) => {
-      return <Menu menuService={menuService} />
+    component: ({ menuService, categoriesService }) => {
+      return <Menu
+        menuService={menuService}
+        categoriesService={categoriesService}
+      />
     }
   }
 ]

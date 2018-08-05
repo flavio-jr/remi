@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import Factory from '@/support/factories'
 import CustomerRoutes from './app/customer/Routes'
 
@@ -13,16 +13,25 @@ const routes = [
 ]
 
 export default () => 
-  routes.map((route, idx) => (
-    <Route
-      key={idx}
-      exact
-      path={route.path}
-      render={
-        props => route.component({
-          ...props,
-          menuService: Factory.get('menuService', Factory)
-        })
-      }
-    />
-  ))
+  [
+    ...routes.map((route, idx) => (
+      <Route
+        key={idx}
+        exact
+        path={route.path}
+        render={
+          props => route.component({
+            ...props,
+            menuService: Factory.get('menuService'),
+            categoriesService: Factory.get('categoriesService')
+          })
+        }
+      />
+    )),
+    (
+      <Redirect
+        from="/"
+        to="/menu"
+      />
+    )
+  ]
