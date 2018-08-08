@@ -1,0 +1,32 @@
+.option-selectable {
+  &:hover {
+    animation-duration: 0.4s;
+    animation-name: "lift-up";
+    transform: scale(1.06);
+  }
+  &:not(:hover) {
+    animation-duration: 0.4s;
+    animation-name: "lift-down";
+    transform: scale(1);
+  }
+}
+
+@keyframes lift-up {
+  from {
+    transform: scale(1)
+  }
+
+  to {
+    transform: scale(1.06)
+  }
+}
+
+@keyframes lift-down {
+  from {
+    transform: scale(1.06)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}

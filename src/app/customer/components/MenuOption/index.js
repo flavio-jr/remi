@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './MenuOption.scss'
 
 const MenuOption = ({ name, price }) =>
-  <div className="card">
+  <div className="card clickable option-selectable">
     <div className="card-content">
       <div className="content">
         <h1 className="title">

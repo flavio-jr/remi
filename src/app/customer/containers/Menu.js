@@ -1,39 +1,34 @@
 import React, { Component } from 'react'
 import CMenu from '../components/Menu'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Menu extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      menu: [],
       categories: []
     }
   }
 
   render () {
-    return <CMenu menuItems={this.state.menu} categories={this.state.categories} />
+    return ( 
+      <CMenu
+        menuItems={this.props.menu}
+        categories={this.state.categories}
+      />
+    )
   }
 
   componentDidMount () {
-    const menu = this
-      .props
-      .menuService
-      .list()
+    const { categoriesService } = this.props
 
-    const categories = this
-      .props
-      .categoriesService
+    categoriesService
       .list()
-
-    Promise.all([menu, categories])
-      .then(([menuItems, categories ]) => {
+      .then(categories => {
         this.setState({
-          menu: [
-            ...this.state.menu,
-            ...menuItems
-          ],
           categories: [
             ...this.state.categories,
             ...categories
@@ -44,9 +39,21 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  menuService: PropTypes.shape({
+  menu: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.isRequired,
+      categoryId: PropTypes.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired
+    }).isRequired
+  ).isRequired,
+  categoriesService: PropTypes.shape({
     list: PropTypes.func.isRequired
-  })
+  }).isRequired
 }
 
-export default Menu
+const mapStateToProps = state => ({
+  menu: state.Menu.items || []
+})
+
+export default withRouter(connect(mapStateToProps)(Menu))

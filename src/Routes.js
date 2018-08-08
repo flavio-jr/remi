@@ -12,24 +12,20 @@ const routes = [
   ...CustomerRoutes
 ]
 
-export default () => 
+export default store => 
   [
     ...routes.map((route, idx) => (
       <Route
         key={idx}
         exact
         path={route.path}
-        render={
-          props => route.component({
-            ...props,
-            menuService: Factory.get('menuService'),
-            categoriesService: Factory.get('categoriesService')
-          })
-        }
+        render={ props => route.component({ ...props, store: store}, Factory) }
       />
     )),
     (
       <Redirect
+        key="redirect"
+        exact
         from="/"
         to="/menu"
       />

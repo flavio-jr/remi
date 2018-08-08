@@ -31,11 +31,9 @@ export default class Header extends Component {
                 Manage
               </a>
               <div className="navbar-dropdown">
-                <a className="navbar-item">
-                  <Link to='/menu'>
-                    Menu
-                  </Link>
-                </a>
+                <Link to='/menu' className="navbar-item">
+                  Menu
+                </Link>
               </div>
             </div>
           </div>

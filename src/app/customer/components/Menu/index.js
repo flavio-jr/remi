@@ -31,6 +31,8 @@ const categoryFinder = (id, categories) =>
 const Menu = ({ menuItems, categories }) => {
   const CategoryMenu = menuByCategory(menuItems)
 
+  if (!menuItems.length) return <span></span>
+
   return (
     <div className="menu">
       {
