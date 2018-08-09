@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { isFetching, doneFetching } from '@/app/common/actions/fetch'
+import { addToOrder } from '@/app/customer/actions/order'
 
 class Menu extends Component {
   constructor (props) {
@@ -14,12 +15,19 @@ class Menu extends Component {
     }
   }
 
+  addItemToOrder (item) {
+    const { dispatch } = this.props
+
+    dispatch(addToOrder(item))
+  }
+
   render () {
     if (this.state.categories.length && this.props.menu.length) {
       return ( 
         <CMenu
           menuItems={this.props.menu}
           categories={this.state.categories}
+          onOptionSelected={this.addItemToOrder.bind(this)}
         />
       )
     }

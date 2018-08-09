@@ -3,9 +3,9 @@ import MenuOption from '../MenuOption'
 import PropTypes from 'prop-types'
 import './Menu.scss'
 
-const itemRender = item => (
+const itemRender = (item, clickHandler) => (
   <div key={item.id} className="column is-one-third">
-    <MenuOption {...item} />
+    <MenuOption {...item} onClick={clickHandler} />
   </div>
 )
 
@@ -28,7 +28,7 @@ const categoryFinder = (id, categories) =>
   categories
     .find(category => category.id === id)
 
-const Menu = ({ menuItems, categories }) => {
+const Menu = ({ menuItems, categories, onOptionSelected }) => {
   const CategoryMenu = menuByCategory(menuItems)
 
   if (!menuItems.length) return <span></span>
@@ -55,7 +55,7 @@ const Menu = ({ menuItems, categories }) => {
                   </div>
                 </h1>
                 <div className="columns is-multiline">
-                  { CategoryMenu[id].map(item => itemRender(item)) }
+                  { CategoryMenu[id].map(item => itemRender(item, onOptionSelected)) }
                 </div>
               </div>
             )
@@ -79,7 +79,8 @@ Menu.propTypes = {
       id: PropTypes.isRequired,
       name: PropTypes.string.isRequired
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  onOptionSelected: PropTypes.func.isRequired
 }
 
 export default Menu

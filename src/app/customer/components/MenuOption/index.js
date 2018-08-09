@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './MenuOption.scss'
 
-const MenuOption = ({ name, price }) =>
-  <div className="card clickable option-selectable">
+const MenuOption = ({ id, name, price, onClick }) =>
+  <div className="card clickable option-selectable" onClick={() => onClick(id)}>
     <div className="card-content">
       <div className="content">
         <h1 className="title">
