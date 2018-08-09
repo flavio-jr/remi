@@ -1,6 +1,4 @@
-export const fetchMenu = () => ({
-  type: 'FETCH_MENU'
-})
+import { isFetching, doneFetching } from './fetch'
 
 export const fetchMenuSuccess = menu => ({
   type: 'FETCH_MENU_SUCCESS',
@@ -9,9 +7,13 @@ export const fetchMenuSuccess = menu => ({
 
 export const fetchMenuItems = MenuService =>
   (dispatch) => {
-    dispatch(fetchMenu())
+    dispatch(isFetching())
 
     return MenuService
       .list()
-      .then(menu => dispatch(fetchMenuSuccess(menu)))
+      .then(menu => {
+        dispatch(doneFetching())
+
+        return dispatch(fetchMenuSuccess(menu))
+      })
   }

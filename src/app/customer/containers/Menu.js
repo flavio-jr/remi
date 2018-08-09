@@ -3,6 +3,7 @@ import CMenu from '../components/Menu'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { isFetching, doneFetching } from '@/app/common/actions/fetch'
 
 class Menu extends Component {
   constructor (props) {
@@ -14,20 +15,27 @@ class Menu extends Component {
   }
 
   render () {
-    return ( 
-      <CMenu
-        menuItems={this.props.menu}
-        categories={this.state.categories}
-      />
-    )
+    if (this.state.categories.length && this.props.menu.length) {
+      return ( 
+        <CMenu
+          menuItems={this.props.menu}
+          categories={this.state.categories}
+        />
+      )
+    }
+
+    return <div></div>
   }
 
   componentDidMount () {
-    const { categoriesService } = this.props
+    const { categoriesService, dispatch } = this.props
+
+    dispatch(isFetching())
 
     categoriesService
       .list()
       .then(categories => {
+        dispatch(doneFetching())
         this.setState({
           categories: [
             ...this.state.categories,

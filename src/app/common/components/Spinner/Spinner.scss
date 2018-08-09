@@ -1,0 +1,40 @@
+.spinner {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(11, 13, 24);
+  opacity: 0.82;
+  position: fixed;
+  z-index: 1000000;
+  top: 0;
+  left: 0;
+}
+
+.wheel {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 30vh;
+}
+.wheel:after {
+  content: " ";
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: wheel 1.2s linear infinite;
+}
+@keyframes wheel {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,3 +1,5 @@
+import reducerRegister from '@/support/utils/reducer/register'
+
 const reducers = {
   'FETCH_MENU': state =>
     Object.assign({}, state, {
@@ -14,19 +16,8 @@ const reducers = {
     })
 }
 
-export default (
-  state = {
-    items: [],
-    loading: false,
-    failureRequest: false
-  },
-  action
-) => {
-  const { type } = action
-
-  if (type in reducers) {
-    return reducers[type](state, action)
-  }
-
-  return state
-}
+export default reducerRegister(reducers, {
+  items: [],
+  loading: false,
+  failureRequest: false
+})

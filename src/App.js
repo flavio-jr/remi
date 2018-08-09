@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom'
 import Routes from './Routes'
 import './App.scss'
 import Header from '@/app/common/components/Header'
+import Spinner from '@/app/common/components/Spinner'
 import { fetchMenuItems } from '@/app/common/actions/menu'
 import factory from '@/support/factories'
 import { connect } from 'react-redux'
@@ -12,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Spinner />
         <Header />
         <div className="app-content container is-fluid">
           <Switch>
