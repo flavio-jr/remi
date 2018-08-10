@@ -1,4 +1,4 @@
-import { isFetching, doneFetching } from './fetch'
+import { isFetching, doneFetching } from '@/domains/common/actions/fetch'
 
 export const fetchMenuSuccess = menu => ({
   type: 'FETCH_MENU_SUCCESS',

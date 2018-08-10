@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import Menu from './common/reducers/menu'
+import Menu from './menu/reducers'
 import Fetch from './common/reducers/fetch'
-import Order from './customer/reducers/order'
+import Order from './order/reducers'
 
 export default combineReducers({
   Menu,

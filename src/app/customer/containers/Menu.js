@@ -3,8 +3,8 @@ import CMenu from '../components/Menu'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { isFetching, doneFetching } from '@/app/common/actions/fetch'
-import { addToOrder } from '@/app/customer/actions/order'
+import { isFetching, doneFetching } from '@/domains/common/actions/fetch'
+import { addToOrder } from '@/domains/order/actions'
 
 class Menu extends Component {
   constructor (props) {
