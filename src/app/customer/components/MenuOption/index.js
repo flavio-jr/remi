@@ -9,9 +9,9 @@ const MenuOption = ({ id, name, price, onClick, isOptionInOrder }) =>
   >
     <div className="card-content">
       { isOptionInOrder && 
-        <button className="button btn-check is-success is-outlined">
+        <div className="btn-check has-text-success has-text-right">
           <i className="fa fa-check"></i>
-        </button>
+        </div>
       }
       <div className="content">
         <h1 className="title">

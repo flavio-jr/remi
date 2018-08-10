@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CMenu from '../components/Menu'
+import OrderButton from '../components/OrderButton'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -23,13 +24,20 @@ class Menu extends Component {
 
   render () {
     if (this.state.categories.length && this.props.menu.length) {
-      return ( 
-        <CMenu
-          menuItems={this.props.menu}
-          categories={this.state.categories}
-          onOptionSelected={this.addItemToOrder.bind(this)}
-          order={this.props.order}
-        />
+      const orderCount = this.props.order.length
+
+      return (
+        <div>
+          <CMenu
+            menuItems={this.props.menu}
+            categories={this.state.categories}
+            onOptionSelected={this.addItemToOrder.bind(this)}
+            order={this.props.order}
+          />
+          {orderCount && (
+            <OrderButton orderCount={orderCount}/>
+          )}
+        </div>
       )
     }
 

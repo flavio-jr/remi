@@ -9,7 +9,7 @@ const Spinner = ({ isFetching }) =>
     <div className="spinner">
       <div className="wheel"></div>
     </div> :
-    <div></div>
+    null
 
 Spinner.propTypes = {
   isFetching: PropTypes.bool.isRequired

@@ -1,0 +1,18 @@
+button.order-button {
+  position: fixed;
+  right: 5%;
+  bottom: 4%;
+  border-radius: 30px;
+  padding: 0.8rem 1rem;
+}
+
+span.order-counter {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 10rem;
+  padding: 0.3rem;
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  font-size: 0.5em;
+}
