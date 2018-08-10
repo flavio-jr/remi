@@ -3,11 +3,15 @@ import MenuOption from '../MenuOption'
 import PropTypes from 'prop-types'
 import './Menu.scss'
 
-const itemRender = (item, clickHandler) => (
-  <div key={item.id} className="column is-one-third">
-    <MenuOption {...item} onClick={clickHandler} />
-  </div>
-)
+const itemRender = (item, clickHandler, order) => {
+  const isItemInOrder = order.find(orderItem => orderItem.id === item.id)
+
+  return (
+    <div key={item.id} className="column is-one-third">
+      <MenuOption {...item} onClick={clickHandler} isOptionInOrder={isItemInOrder}/>
+    </div>
+  )
+}
 
 const menuByCategory = menu =>
   menu
@@ -28,7 +32,7 @@ const categoryFinder = (id, categories) =>
   categories
     .find(category => category.id === id)
 
-const Menu = ({ menuItems, categories, onOptionSelected }) => {
+const Menu = ({ menuItems, categories, onOptionSelected, order }) => {
   const CategoryMenu = menuByCategory(menuItems)
 
   if (!menuItems.length) return <span></span>
@@ -55,7 +59,7 @@ const Menu = ({ menuItems, categories, onOptionSelected }) => {
                   </div>
                 </h1>
                 <div className="columns is-multiline">
-                  { CategoryMenu[id].map(item => itemRender(item, onOptionSelected)) }
+                  { CategoryMenu[id].map(item => itemRender(item, onOptionSelected, order)) }
                 </div>
               </div>
             )

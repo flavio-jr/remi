@@ -28,6 +28,7 @@ class Menu extends Component {
           menuItems={this.props.menu}
           categories={this.state.categories}
           onOptionSelected={this.addItemToOrder.bind(this)}
+          order={this.props.order}
         />
       )
     }
@@ -69,7 +70,8 @@ Menu.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  menu: state.Menu.items || []
+  menu: state.Menu.items || [],
+  order: state.Order
 })
 
 export default withRouter(connect(mapStateToProps)(Menu))

@@ -1,22 +1,37 @@
 .option-selectable {
-  &:hover {
+  &:hover:not(.opt-selected) {
     animation-duration: 0.4s;
     animation-name: "lift-up";
     transform: scale(1.06);
+    box-shadow: -3px 16px 8px #989797;
   }
-  &:not(:hover) {
+  &:not(:hover):not(.opt-selected) {
     animation-duration: 0.4s;
     animation-name: "lift-down";
     transform: scale(1);
   }
+  &.opt-selected {
+    transform: scale(1.06);
+    box-shadow: -3px 16px 8px #989797;
+    border: 1px solid rgba(91, 89, 89, 0.1);
+  }
+}
+
+button.btn-check {
+  border-radius: 45px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 @keyframes lift-up {
   from {
-    transform: scale(1)
+    transform: scale(1);
+    box-shadow: -3px 16px 8px #989797;
   }
 
   to {
+    box-shadow: -3px 16px 8px #989797;
     transform: scale(1.06)
   }
 }
