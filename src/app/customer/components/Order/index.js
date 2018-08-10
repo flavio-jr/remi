@@ -7,8 +7,16 @@ const presentationalOrder = (order, menu) =>
     amount: orderItem.amount
   }))
 
-const Order = ({ order, menu, showModal, onClose, onRemoveItem, onAmountChange }) =>
-  <div className={`modal ${showModal ? 'is-active': ''}`}>
+const Order = ({
+  order,
+  menu,
+  showModal,
+  onClose,
+  onRemoveItem,
+  onAmountChange,
+  onConfirmClick
+}) =>
+  <div className={`order modal ${showModal ? 'is-active': ''}`}>
     <div className="modal-background" onClick={() => onClose()}></div>
     <div className="modal-card">
       <header className="modal-card-head">
@@ -52,6 +60,14 @@ const Order = ({ order, menu, showModal, onClose, onRemoveItem, onAmountChange }
               ))
           }
         </div>
+      </div>
+      <div className="modal-card-foot has-text-right is-block">
+          <button
+            className="button is-success"
+            onClick={() => onConfirmClick()}
+          >
+            Confirm order
+          </button>
       </div>
     </div>
     <button className="modal-close is-large" aria-label="close"></button>

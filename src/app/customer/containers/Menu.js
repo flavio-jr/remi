@@ -5,8 +5,14 @@ import OrderModal from '../components/Order'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.css'
 import { isFetching, doneFetching } from '@/domains/common/actions/fetch'
-import { addToOrder, removeFromOrder, changeOrderItemAmount } from '@/domains/order/actions'
+import {
+  addToOrder,
+  removeFromOrder,
+  changeOrderItemAmount
+} from '@/domains/order/actions'
 
 class Menu extends Component {
   constructor (props) {
@@ -43,6 +49,29 @@ class Menu extends Component {
     })
   }
 
+  saveOrder () {
+    const { orderService, order } = this.props
+      
+    orderService
+      .store({
+        items: order
+      })
+      .then(() => {
+        this.setState({ showOrder: false })
+        swal({
+          title: 'Hooray!',
+          text: 'You order has arrived the kithen. :p',
+          type: 'success',
+          confirmButtonText: 'Check orders'
+        })
+        .then(result => {
+          if ('value' in result && result.value) {
+            this.props.history.push('/orders')
+          }
+        })
+      })
+  }
+
   render () {
     if (this.state.categories.length && this.props.menu.length) {
       const orderCount = this.props.order.length
@@ -56,6 +85,7 @@ class Menu extends Component {
             onClose={this.toggleOrderModal.bind(this)}
             onRemoveItem={this.toggleOrderItem.bind(this)}
             onAmountChange={this.changeOrderItemAmount.bind(this)}
+            onConfirmClick={this.saveOrder.bind(this)}
           />
           <CMenu
             menuItems={this.props.menu}
@@ -63,7 +93,7 @@ class Menu extends Component {
             onOptionSelected={this.toggleOrderItem.bind(this)}
             order={this.props.order}
           />
-          {orderCount && (
+          {!!orderCount && (
             <OrderButton orderCount={orderCount} onClick={this.toggleOrderModal.bind(this)}/>
           )}
         </div>
@@ -103,6 +133,9 @@ Menu.propTypes = {
   ).isRequired,
   categoriesService: PropTypes.shape({
     list: PropTypes.func.isRequired
+  }).isRequired,
+  orderService: PropTypes.shape({
+    store: PropTypes.func.isRequired
   }).isRequired
 }
 

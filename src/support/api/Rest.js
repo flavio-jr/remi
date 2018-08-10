@@ -1,3 +1,8 @@
+const defaultResolver = ( Entity ) => ({
+  setEntity: entity => Entity(entity),
+  setEntityList: entityList => entityList.map(entity => Entity(entity))
+})
+
 /**
  * Handle REST API calls
  * @param {Object} http
@@ -5,7 +10,11 @@
  * @param {Object} resolver
  */
 export default http => 
-  (resource, resolver) => ({
+  (
+    resource,
+    entity,
+    resolver = defaultResolver
+  ) => ({
     /**
      * Gets the resource list from server
      * @param {Object} qs 
@@ -16,7 +25,7 @@ export default http =>
         .get(resource, {
           params: qs
         })
-        .then(res => resolver.setEntityList(res.data))
+        .then(res => resolver(entity).setEntityList(res.data))
     },
 
     /**
@@ -27,7 +36,7 @@ export default http =>
     store (data) {
       return http
         .post(resource, data)
-        .then(res => resolver.setEntity(res.data))
+        .then(res => resolver(entity).setEntity(res.data))
     },
 
     /**

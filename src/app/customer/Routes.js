@@ -7,8 +7,8 @@ export default [
     component: (props, factory) => 
       <Menu
         {...props}
-        menuService={factory.get('menuService')}
         categoriesService={factory.get('categoriesService')}
+        orderService={factory.get('ordersService')}
       />
   }
 ]

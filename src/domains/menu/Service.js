@@ -1,4 +1,3 @@
-export default (rest, MenuEntity) => rest('menu', {
-  setEntityList: menu => menu.map(item => MenuEntity(item)),
-  setEntity: item => MenuEntity(item)
-})
+import MenuEntity from './Entity'
+
+export default rest => rest('menu', MenuEntity)

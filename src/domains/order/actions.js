@@ -1,3 +1,5 @@
+import { isFetching, doneFetching } from '@/domains/common/actions/fetch'
+
 export const addToOrder = id => ({
   type: 'ADD_TO_ORDER',
   id: id
@@ -13,3 +15,17 @@ export const changeOrderItemAmount = (id, amount) => ({
   id: id,
   amount: amount
 })
+
+export const setOrder = order => ({
+  type: 'SET_ORDER',
+  order
+})
+
+export const saveOrder = (OrderService, Order) =>
+  (dispatch) => {
+    dispatch(isFetching())
+
+    return OrderService
+      .store(Order)
+      .then(() => dispatch(doneFetching()))
+  }
