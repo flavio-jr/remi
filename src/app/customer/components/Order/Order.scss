@@ -1,0 +1,13 @@
+.order-list {
+  padding: 0.1rem 0.8rem;
+
+  >.columns.order-item {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    border-bottom: 1px solid #d7d7d7;
+  }
+
+  span {
+    font-size: 1.2em;
+  }
+}
