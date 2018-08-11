@@ -16,11 +16,6 @@ export const changeOrderItemAmount = (id, amount) => ({
   amount: amount
 })
 
-export const setOrder = order => ({
-  type: 'SET_ORDER',
-  order
-})
-
 export const saveOrder = (OrderService, Order) =>
   (dispatch) => {
     dispatch(isFetching())

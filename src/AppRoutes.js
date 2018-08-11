@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import Factory from '@/support/factories'
 import CustomerRoutes from './app/customer/Routes'
-import NotFoundPage from '@/app/common/pages/NotFound'
 import AppLayout from './app/common/components/Layout'
 
 /**
@@ -14,7 +13,7 @@ const routes = [
   ...CustomerRoutes
 ]
 
-export default store => 
+export default store =>
   [
     ...routes.map((route, idx) => (
       <Route
@@ -34,12 +33,6 @@ export default store =>
         exact
         from="/"
         to="/menu"
-      />
-    ),
-    (
-      <Route
-        key="not-found"
-        component={NotFoundPage}
       />
     )
   ]

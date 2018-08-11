@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Switch } from 'react-router-dom'
-import Routes from './Routes'
+import AppRoutes from './AppRoutes'
+import PageRoutes from './PageRoutes'
 import './App.scss'
-import Header from '@/app/common/components/Header'
-import Spinner from '@/app/common/components/Spinner'
 import { fetchMenuItems } from '@/domains/menu/actions'
 import factory from '@/support/factories'
 import { connect } from 'react-redux'
@@ -12,15 +11,10 @@ import { withRouter } from 'react-router-dom'
 class App extends Component {
   render() {
     return (
-      <div>
-        <Spinner />
-        <Header />
-        <div className="app-content container is-fluid">
-          <Switch>
-            { Routes(this.props.store) }
-          </Switch>
-        </div>
-      </div>
+      <Switch>
+        { AppRoutes(this.props.store) }
+        { PageRoutes() }
+      </Switch>
     )
   }
 
