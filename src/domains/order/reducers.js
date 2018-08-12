@@ -43,7 +43,11 @@ const reducers = {
           amount: action.amount
         }
       })
-  }
+  },
+  'FETCH_ORDERS_SUCCESS': (state, action) =>
+    Object.assign({}, state, {
+      orders: action.orders
+    })
 }
 
 export default reducerRegister(reducers, [])

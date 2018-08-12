@@ -34,6 +34,9 @@ export default class Header extends Component {
                 <Link to='/menu' className="navbar-item">
                   Menu
                 </Link>
+                <Link to="/orders" className="navbar-item">
+                  Orders
+                </Link>
               </div>
             </div>
           </div>

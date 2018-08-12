@@ -100,7 +100,7 @@ class Menu extends Component {
       )
     }
 
-    return <div></div>
+    return null
   }
 
   componentDidMount () {

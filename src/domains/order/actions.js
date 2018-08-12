@@ -24,3 +24,21 @@ export const saveOrder = (OrderService, Order) =>
       .store(Order)
       .then(() => dispatch(doneFetching()))
   }
+
+export const fetchOrdersSuccess = orders => ({
+  type: 'FETCH_ORDERS_SUCCESS',
+  orders: orders
+})
+
+export const fetchOrders = OrderService =>
+  dispatch => {
+    dispatch(isFetching())
+
+    return OrderService
+      .list()
+      .then(orders => {
+        dispatch(doneFetching())
+
+        return dispatch(fetchOrdersSuccess(orders))
+      })
+  }

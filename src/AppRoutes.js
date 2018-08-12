@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import Factory from '@/support/factories'
 import CustomerRoutes from './app/customer/Routes'
+import KitchenRoutes from './app/kitchen/Routes'
 import AppLayout from './app/common/components/Layout'
 
 /**
@@ -10,7 +11,8 @@ import AppLayout from './app/common/components/Layout'
  * this: ...DomainRoutes
  */
 const routes = [
-  ...CustomerRoutes
+  ...CustomerRoutes,
+  ...KitchenRoutes
 ]
 
 export default store =>

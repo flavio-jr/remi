@@ -1,0 +1,18 @@
+.card > .card-footer {
+  border-top: none;
+  padding: 0 0.8rem;
+}
+
+.card-footer-item {
+  &.status {
+    justify-content: left;
+  }
+
+  &.status:not(:last-child) {
+    border-right: none;
+  }
+
+  &.btn-status {
+    justify-content: right;
+  }
+}
