@@ -7,34 +7,41 @@ const findOrderIndex = (state, id) => state.findIndex(findOrderById(id))
 
 const reducers = {
   'ADD_TO_ORDER': (state, action) => {
-    if (findOrder(state, action.id)) {
+    if (findOrder(state.current, action.id)) {
       return state
     }
 
-    return [
-      ...state,
-      {
-        id: action.id,
-        amount: 1
-      }
-    ]
+    return Object.assign({}, state, {
+      current: [
+        ...state.current,
+        {
+          id: action.id,
+          amount: 1
+        }
+      ]
+    })
   },
   'REMOVE_FROM_ORDER': (state, action) => {
-    const orderItemIdx = findOrderIndex(state, action.id)
+    const orderItemIdx = findOrderIndex(state.current, action.id)
 
     if (orderItemIdx === -1) {
       return state
     }
 
-    return state
-      .filter((_, idx) => idx !== orderItemIdx)
+    return {
+      ...state,
+      current: state
+        .current
+        .filter((_, idx) => idx !== orderItemIdx)
+    }
   },
   'CHANGE_ORDER_ITEM_AMOUNT': (state, action) => {
     if (action.amount <= 0) return state
 
-    const orderItemIdx = findOrderIndex(state, action.id)
+    const orderItemIdx = findOrderIndex(state.current, action.id)
 
-    return state
+    const newCurrent = state
+      .current
       .map((orderItem, idx) => {
         if (idx !== orderItemIdx) return orderItem
 
@@ -43,6 +50,10 @@ const reducers = {
           amount: action.amount
         }
       })
+
+    return Object.assign({}, state, {
+      current: newCurrent
+    })
   },
   'FETCH_ORDERS_SUCCESS': (state, action) =>
     Object.assign({}, state, {
@@ -50,4 +61,4 @@ const reducers = {
     })
 }
 
-export default reducerRegister(reducers, [])
+export default reducerRegister(reducers, { current: [] })

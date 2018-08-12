@@ -141,7 +141,7 @@ Menu.propTypes = {
 
 const mapStateToProps = state => ({
   menu: state.Menu.items || [],
-  order: state.Order
+  order: state.Order.current || []
 })
 
 export default withRouter(connect(mapStateToProps)(Menu))
