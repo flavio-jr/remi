@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
-import { STATUS_PRESETS, ORDER_STATUS } from '@/domains/order/enum'
+import PropTypes from 'prop-types'
+import { STATUS_PRESETS, ORDER_STATUS, STATUS_WEIGHTS } from '@/domains/order/enum'
 import './OrderItem.scss'
 
 const totalPrice = items => items.reduce( (acc, item) => acc + item.price, 0 )
+
+const nextStatus = currentStatus =>
+  STATUS_WEIGHTS[
+    STATUS_WEIGHTS.indexOf(currentStatus) + 1
+  ]
 
 class OrderItem extends Component {
   constructor (props) {
@@ -14,7 +20,7 @@ class OrderItem extends Component {
   }
 
   render () {
-    const { order, items } = this.props
+    const { order, items, onChangeStatus } = this.props
 
     return (
       <div className="card">
@@ -22,9 +28,9 @@ class OrderItem extends Component {
           <div className="content">
             <p className="title is-4">
               # { order.id }
-              <p className="subtitle is-5 is-pulled-right">
+              <span className="subtitle is-5 is-pulled-right">
                 R$ { totalPrice(items) }
-              </p>
+              </span>
             </p>
             <a
               className="subtitle is-6"
@@ -51,16 +57,35 @@ class OrderItem extends Component {
             </p>
           </div>
           <div className="card-footer-item btn-status">
-            <button
-              className={`button is-small is-inline-block is-pulled-right ${STATUS_PRESETS[order.status].button}`}
-            >
-              { STATUS_PRESETS[order.status].buttonText }
-            </button>
+            {
+              order.status !== 'C' && (
+                <button
+                  className={`button is-small is-inline-block is-pulled-right ${STATUS_PRESETS[order.status].button}`}
+                  onClick={() => onChangeStatus(nextStatus(order.status))}
+                >
+                  { STATUS_PRESETS[order.status].buttonText }
+                </button>
+              )
+            }
           </div>
         </footer>
       </div>
     )
   }
+}
+
+OrderItem.propTypes = {
+  order: PropTypes.shape({
+    id: PropTypes.isRequired,
+    status: PropTypes.string.isRequired
+  }).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired
+    })
+  ).isRequired
 }
 
 export default OrderItem

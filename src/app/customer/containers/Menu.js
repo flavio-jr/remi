@@ -11,7 +11,8 @@ import { isFetching, doneFetching } from '@/domains/common/actions/fetch'
 import {
   addToOrder,
   removeFromOrder,
-  changeOrderItemAmount
+  changeOrderItemAmount,
+  resetCurrentOrder
 } from '@/domains/order/actions'
 
 class Menu extends Component {
@@ -50,7 +51,7 @@ class Menu extends Component {
   }
 
   saveOrder () {
-    const { orderService, order } = this.props
+    const { orderService, order, dispatch } = this.props
       
     orderService
       .store({
@@ -58,6 +59,8 @@ class Menu extends Component {
       })
       .then(() => {
         this.setState({ showOrder: false })
+        dispatch(resetCurrentOrder())
+
         swal({
           title: 'Hooray!',
           text: 'You order has arrived the kithen. :p',

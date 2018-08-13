@@ -11,17 +11,25 @@ const Items = (order, menu) =>
       ...findMenuOption(orderItem.id, menu)
     }))
 
-const Order = ({ orders, menu }) =>
-  <div className="columns is-multiline">
-    {
-      orders.map(
-        (order, idx) => (
-          <div className="column is-3" key={idx}>
-            <OrderItem order={order} items={Items(order, menu)} />
-          </div>
-        )
-      )
-    }
-  </div>
+
+const Order = ({ orders, menu, onOrderChange }) =>
+  (!!menu.length && !!orders.length) ?
+    (
+      <div className="columns is-multiline">
+        {
+          orders.map(
+            (order, idx) => (
+              <div className="column is-3" key={idx}>
+                <OrderItem
+                  order={order}
+                  items={Items(order, menu)}
+                  onChangeStatus={status => onOrderChange(order.id, status)}
+                />
+              </div>
+            )
+          )
+        }
+      </div>
+    ) : null
 
 export default Order

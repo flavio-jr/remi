@@ -58,6 +58,10 @@ const reducers = {
   'FETCH_ORDERS_SUCCESS': (state, action) =>
     Object.assign({}, state, {
       orders: action.orders
+    }),
+  'RESET_CURRENT_ORDER': state =>
+    Object.assign({}, state, {
+      current: []
     })
 }
 

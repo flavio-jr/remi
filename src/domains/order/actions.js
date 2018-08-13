@@ -16,14 +16,9 @@ export const changeOrderItemAmount = (id, amount) => ({
   amount: amount
 })
 
-export const saveOrder = (OrderService, Order) =>
-  (dispatch) => {
-    dispatch(isFetching())
-
-    return OrderService
-      .store(Order)
-      .then(() => dispatch(doneFetching()))
-  }
+export const resetCurrentOrder = () => ({
+  type: 'RESET_CURRENT_ORDER'
+})
 
 export const fetchOrdersSuccess = orders => ({
   type: 'FETCH_ORDERS_SUCCESS',

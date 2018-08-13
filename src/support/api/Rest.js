@@ -58,5 +58,15 @@ export default http =>
     destroy (identifier) {
       return http
         .delete(`${resource}/${identifier}`)
+    },
+    
+    /**
+     * Alters an resource
+     * @param {*} identifier The resource identifier
+     * @returns {Promise}
+     */
+    alter (identifier, data) {
+      return http
+        .patch(`${resource}/${identifier}`, data)
     }
   })
